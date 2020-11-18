@@ -1,83 +1,79 @@
 * {
     box-sizing: border-box;
 }
-$primary: #50AC7D;
 $menu-item-width: 200px;
-$menu-height: 100px;
+$menu-height: 80px;
 $menu-item-padding: 20px;
 $white: #fff;
+$black: rgb(18, 18, 18);
 
 body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
+    background-image: url(background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 header {
     height: $menu-height;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    background-color: $primary;
-  
+    background-color: $white;
 
     nav {
         height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 50px;
+
         ul {
             // Top level menu
             list-style-type: none;
-            font-size: 2rem;
+            font-size: 1.5rem;
             height: 100%;
             margin: 0;
             padding: 0;
             position: relative;
 
-
-            li {
+            > li {
                 display: inline-block;
                 line-height: $menu-height;
                 width: $menu-item-width;
-                background-color: $primary;
                 position: relative;
+                background-color: $white;
 
-                a { 
-                    color: $white;
+                a {
+                    color: $black;
+                    display: block;
                     text-decoration: none;
                     padding: 0 $menu-item-padding;
                 }
 
                 &:hover {
-                    background-color: darken($primary, 30%);
+                    background-color: darken($white, 5%);
                     > ul {
-                        display: inherit;
-                        li { background-color: darken($primary, 10%); }
+                        height: auto;
+                        opacity: 1;
                     }
                 }
 
-                
-                > a:after { content:  ' ✚'; }
-                > a:only-child:after { content: ''; }
-            }
-
-            // Second level menu
-            ul {
-                display: none;
-                position: absolute; 
-                top: $menu-height;
-                left: 0;
-
-
-                li {
-                    background-color: darken($primary, 20%);
-                    width:100%;
-                    display:list-item;
-                    position: relative;
-                    width: $menu-item-width;
+                ul {
+                    transition: all 0.5s ease;
+                    opacity: 0;
+                    height: 0;
+                    position: absolute;
+                    overflow: hidden;
+                    top: $menu-height;
+                    left: 0;
+                    border-radius: 0 0 6px 6px;
                 }
 
-                ul {
-                        top: 0;
-                        left: $menu-item-width;
+                > a:after {
+                    content: " +";
+                }
+                > a:only-child:after {
+                    content: "";
                 }
             }
         }
@@ -85,14 +81,19 @@ header {
 }
 
 @media screen and (max-width: 600px) {
-    header > nav > ul {
-        li {
-            display: block;
-        }
+    header {
+        > nav {
+            padding: 0 0 0 25px;
+            ul {
+                li {
+                    display: block;
 
-        ul {
-            position: static;
-            left: inherit;
+                    ul {
+                        position: static;
+                        li { background-color: darken($white, 4%); }
+                    }
+                }
+            }
         }
-    } 
+    }
 }
