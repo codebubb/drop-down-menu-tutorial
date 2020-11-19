@@ -36,6 +36,10 @@ header {
         align-items: center;
         padding: 0 50px;
 
+        #mobile-nav {
+            display: none;
+        }
+
         ul {
             // Top level menu
             list-style-type: none;
